@@ -1,0 +1,65 @@
+---
+const res = await fetch('https://api.sampleapis.com/coffee/hot');
+const data = await res.json();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Coffee</title>
+  </head>
+  <body class="bg-gray-700 px-12 text-white w-1/2">
+    <video autoplay muted loop id="myVideo">
+      <source src="coffee.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-gray-700 p-4 content">
+      <h1 class="text-3xl font-bold py-6 bg-gray-800 rounded-lg px-6">Types Of Coffee</h1>
+      <ul>
+        {
+          data.map((item: { image: string; description: string; title: string }) => (
+            <li class="py-4">
+              <span class="text-2xl">{item.title}</span>
+              <br />
+              {item.description}
+              <br />
+              <img class="w-80 rounded-lg mt-4" src={item.image} alt="image of coffeecup" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </body>
+</html>
+
+    <style>
+			@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap');
+
+      #myVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+      }
+
+      .content {
+        position: relative;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        color: #f1f1f1;
+        width: 100%;
+        padding: 20px;
+      }
+
+			h1 {
+				font-family: 'Bungee Spice', cursive;
+			}
+
+			span {
+				font-family: 'Rubik Dirt', cursive;
+			}
+    </style>
